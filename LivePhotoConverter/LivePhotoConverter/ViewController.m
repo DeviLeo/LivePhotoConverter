@@ -123,9 +123,7 @@
         NSLog(@"Init reader error: %@", error);
         return;
     }
-    NSMutableArray<AVMetadataItem *> *metadata = asset.metadata.mutableCopy;
     AVMetadataItem *item = [self createContentIdentifierMetadataItem:identifier];
-    [metadata addObject:item];
     
     // Writer
     NSURL *videoFileURL = [NSURL fileURLWithPath:outputFile];
@@ -135,7 +133,7 @@
         NSLog(@"Init writer error: %@", error);
         return;
     }
-    [writer setMetadata:metadata];
+    [writer setMetadata:@[metadata]];
     
     // Tracks
     NSArray<AVAssetTrack *> *tracks = [asset tracks];
